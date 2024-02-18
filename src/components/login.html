@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/4e7341fe65.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="login-container">
+        <form id="loginForm">
+            <h1>Quick Stay</h1>
+            <div class="input-container">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="Usuario" required>
+            </div>
+            
+            <div class="input-container">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            </div>
+
+        <div class="buttons-container"></div>
+            <button type="button" onclick="login()">Iniciar Sesión</button>
+            <button type="button" onclick="Cancelar()">Cancelar</button>
+        </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
