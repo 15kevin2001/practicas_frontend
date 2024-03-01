@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './login_styles.css';
+import './css/login_styles.css';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -20,22 +20,26 @@ export const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post("http://127.0.0.1:9000/api/cliente_login", {
+            const response = await axios.post("http://localhost:9000/api/cliente_login", {
                 "usuario": email,
                 "password": password
             });
             console.log(response); // No necesitas comillas alrededor de response aquí
-            if (response.data.message.includes("Credenciales válidas: Usuario existe.")) {
+            if (response.data.code == 0) {
                 console.log("Acceso concedido");
                 window.confirm("acceso concedido");
-                // Realiza acciones después de un inicio de sesión exitoso
-                // Autenticación exitosa
                 setIsLoggedIn(true);
                 // Guardar la sesión en localStorage
                 localStorage.setItem("session", JSON.stringify({ email }));
             } else {
-                console.log("Acceso denegado");
-                window.confirm("contraseña o correo incorrectos");
+                if(response.data.code == 1){
+                    console.log("Acceso denegado");
+                    window.confirm("contraseña incorrecta");
+                }else{
+                    console.log("Acceso denegado");
+                    window.confirm("usuario no existe");
+                }
+                
                 // Realiza acciones cuando el inicio de sesión no es exitoso
             }
         } catch (error) {
@@ -45,7 +49,7 @@ export const Login = () => {
 
     if (isLoggedIn) {
         console.log("isLoggedIn");
-        window.location.href = "inicio";
+        window.location.href = "hoteles";
         /*localStorage.removeItem("session");
         setIsLoggedIn(false);*/
     }
